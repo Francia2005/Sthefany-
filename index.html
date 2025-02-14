@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Para Sthefany ✨</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(-45deg, #ff69b4, #ff1493, #da70d6, #ff69b4);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            color: rgb(0, 0, 0);
+            opacity: 0;
+            animation: sparkle 2s infinite;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        h1 {
+            font-size: 4rem;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .subtitle {
+            color: rgb(40, 39, 39);
+            font-size: 1.5rem;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+        }
+
+        .button-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            padding: 25px;
+            border-radius: 20px;
+            width: 100%;
+            margin-bottom: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.8),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .button-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(45deg, #ffe6f0, #fff);
+        }
+
+        .button-card:hover::before {
+            left: 100%;
+        }
+
+        .button-card.active {
+            background: linear-gradient(45deg, #ffb6c1, #ffc0cb);
+            transform: scale(1.05);
+        }
+
+        .icon {
+            font-size: 2rem;
+            margin-right: 20px;
+            animation: heartbeat 2s infinite;
+        }
+
+        .button-text {
+            color: #e83e8c;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .message-container {
+            position: relative;
+            margin: 40px auto;
+            max-width: 600px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .message-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .message-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            font-size: 1.2rem;
+            color: #e83e8c;
+            line-height: 1.8;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 182, 193, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+
+        .message-card:hover::after {
+            transform: translateX(100%);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+        }
+
+        .hearts-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .floating-heart {
+            font-size: 2.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-heart:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .floating-heart:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        .final-message {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #000000, #ffffff, #ff69b4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: gradient 3s linear infinite;
+            background-size: 200% auto;
+        }
+
+        .flowers {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .flower {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 6s infinite;
+            opacity: 0.6;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            .button-text { font-size: 1.1rem; }
+            .final-message { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="flowers" id="flowers"></div>
+    
+    <div class="container">
+        <header class="glass-card animate__animated animate__fadeIn">
+            <h1>Para Sthefany</h1>
+            <p class="subtitle"> Sinceramente de lo poco que te e visto eres una persona increíble, responsable, inteligente, sobre todo trabajadora y eso te define como una excelente persona. No dejes que las dificultades apaguen tu luz. Sigue creyendo en ti misma, porque tienes todo para lograr lo que te propongas.</p>
+        </header>
+
+        <div class="buttons-container">
+            <button class="button-card animate__animated animate__fadeInLeft" data-message="Aunque te conozco poco, me basta para ver que eres una persona increíble. ¡Sigue adelante con esa misma energía! ✨💪">
+                <span class="icon">⭐</span>
+                <span class="button-text">Una persona increíble</span>
+            </button>
+
+            <button class="button-card animate__animated animate__fadeInRight" data-message="Gracias por ser esa amiga con la que siempre se puede contar. ¡Eres lo máximo! 💖">
+                <span class="icon">❤️</span>
+                <span class="button-text">Una amiga especial</span>
+            </button>
+
+            <button class="button-card animate__animated animate__fadeInLeft" data-message="Eres súper inteligente y luchadora, no hay nada que te detenga. ¡Sigue así! 🚀🔥">
+                <span class="icon">✨</span>
+                <span class="button-text">Sigue brillando</span>
+            </button>
+
+            <button class="button-card animate__animated animate__fadeInRight" data-message="Aunque te conozco poco, es imposible no notar lo increíble que eres, por dentro y por fuera. Tienes una belleza única que brilla en todo lo que haces. ✨❤️">
+                <span class="icon">💝</span>
+                <span class="button-text">Tu belleza única</span>
+            </button>
+
+            <button class="button-card animate__animated animate__fadeInLeft" data-message="Tu dedicación y perseverancia son verdaderamente inspiradoras. Cada meta que te propones, la alcanzas con determinación. ¡Eres extraordinaria! 🌟💫">
+                <span class="icon">👑</span>
+                <span class="button-text">Tu dedicación</span>
+            </button>
+        </div>
+
+        <div class="message-container">
+            <div class="message-card"></div>
+        </div>
+
+        <footer class="footer glass-card animate__animated animate__fadeInUp">
+            <div class="hearts-container">
+                <span class="floating-heart">❤️</span>
+                <span class="floating-heart">💖</span>
+                <span class="floating-heart">❤️</span>
+            </div>
+            <p class="final-message">Gracias por tu amistad</p>
+        </footer>
+    </div>
+
+    <script>
+        // Crear estrellas brillantes
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCharacters = ['✦', '✧', '✯', '✭', '✮'];
+            
+            for(let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                star.textContent = starCharacters[Math.floor(Math.random() * starCharacters.length)];
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Crear flores flotantes
+        function createFlowers() {
+            const flowersContainer = document.getElementById('flowers');
+            const flowers = ['🌸', '🌺', '🌹', '🌷', '💐'];
+            
+            for(let i = 0; i < 20; i++) {
+                const flower = document.createElement('div');
+                flower.className = 'flower';
+                flower.style.left = Math.random() * 100 + 'vw';
+                flower.style.top = Math.random() * 100 + 'vh';
+                flower.style.animationDelay = Math.random() * 3 + 's';
+                flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+                flowersContainer.appendChild(flower);
+            }
+        }
+
+        // Manejar clicks en botones
+        const buttons = document.querySelectorAll('.button-card');
+        const messageContainer = document.querySelector('.message-container');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remover clase active de todos los botones
+                buttons.forEach(btn => btn.classList.remove('active'));
+                
+                // Agregar clase active al botón clickeado
+                button.classList.add('active');
+                
+                // Mostrar mensaje con animación
+                messageContainer.classList.add('visible');
+                const messageCard = document.querySelector('.message-card');
+                messageCard.textContent = button.dataset.message;
+                messageCard.classList.add('animate__animated', 'animate__fadeIn');
+            });
+        });
+
+        // Inicializar efectos
+        createStars();
+        createFlowers();
+    </script>
+</body>
+</html>
